@@ -16,7 +16,6 @@ export function App() {
   const [page, setPage] = useState(Math.floor(Math.random() * (1 + 500) + 1));
   const [movies, setMovies] = useState<Movies[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movies>();
-  const [maxMovieSelected, setMaxMovieSelected] = useState(0);
   
   useEffect(() => {
     api.get(
@@ -28,25 +27,13 @@ export function App() {
   }, [selectedMovie]);
 
   function selectedMovies() {
-    if(maxMovieSelected === 3) {
-      return setSelectedMovie({
-        id: 1,
-        title: 'Ops, chega de filmes. Bora codar! 🚀',
-        overview: '',
-        poster_path: 'estudar'
-      })
-    }
-    
     const selected = Math.floor(Math.random() * movies.length);
     movies.map((movie, index) => {
       if(selected === index) {
         setSelectedMovie(movie);
       }
     })
-    setMaxMovieSelected((state) => {
-      return state + 1;
-    })
-    
+
     return setPage(Math.floor(Math.random() * (1 + 500) + 1));
   }
 
